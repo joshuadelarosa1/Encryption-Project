@@ -1,67 +1,63 @@
 import java.io.PrintWriter;
 
 public class CaesarCipher{
-    public static void main(String[] args) throws Exception{
+  public static void main(String[] args) throws Exception{
+    
+    PrintWriter pen = new PrintWriter(System.out, true);
+    
+    // error checking
+    if(args.length != 2){
+      System.err.println("You have entered an incorrect number of parameters. Please try again.");
+      System.exit(2);
+    }
 
-        PrintWriter pen = new PrintWriter(System.out, true);
-
-        // error checking
-        if(args.length != 2){
-          System.err.println("You have entered an incorrect number of parameters. Please try again.");
-          System.exit(2);
-        }
-
-        if(args[0].equals("encode")){
-            encrypt(pen, args[1]);
-        }
-
-        else if(args[0].equals("decode")){
-            decrypt(pen, args[1]);
-        }
-
-        // error checking
-        else{
-            System.err.println("Valid inputs are \"encode\" or \"decode\". Please try again.");
-            System.exit(1);
-        }
+    if(args[0].equals("encode")){
+      encrypt(pen, args[1]);
+    }
+    else if(args[0].equals("decode")){
+      decrypt(pen, args[1]);
+    }
+  
+    // error checking 
+    else{
+      System.err.println("Valid inputs are \"encode\" or \"decode\". Please try again.");
+      System.exit(1);
+    }
         
-    } // main
+  } // main
 
-    static void encrypt(PrintWriter pen, String arg){
-
-        int base = (int) 'a';
-        char[] str = arg.toCharArray();
+  static void encrypt(PrintWriter pen, String arg){
+      
+    int base = (int) 'a';
+    char[] str = arg.toCharArray();
         
-        for(int n = 0; n < 26; n++){
-            pen.printf("n = %d:", n);
-            for(int i = 0; i < arg.length(); i++){
+    for(int n = 0; n < 26; n++){
+      pen.printf("n = %d:", n);
+        for(int i = 0; i < arg.length(); i++){
+              int ch = str[i];
+              int temp = ch - base;
 
-                int ch = str[i];
-                int temp = ch - base;
-
-                int result = (temp + n) % 26;
-                char chNew = (char) (result + base);
-
-                pen.print(chNew);
+              int result = (temp + n) % 26;
+              char chNew = (char) (result + base);
+              pen.print(chNew);
             }
-            pen.println();
-        }
-    } //encrypt
+      pen.println();
+    }
+  } //encrypt
 
-    static void decrypt(PrintWriter pen, String arg){
+  static void decrypt(PrintWriter pen, String arg){
+    
+    int base = (int) 'a';
+    char[] str = arg.toCharArray();
         
-        int base = (int) 'a';
-        char[] str = arg.toCharArray();
-        
-        for(int n = 0; n < 26; n++){
-            pen.printf("n = %d:", n);
-            for(int i = 0; i < arg.length(); i++){
+    for(int n = 0; n < 26; n++){
+      pen.printf("n = %d:", n);
+        for(int i = 0; i < arg.length(); i++){
+              int ch = str[i];
+              int temp = ch - base;
+              int result = (temp - n) % 26;
 
-                int ch = str[i];
-                int temp = ch - base;
-                int result = (temp - n) % 26;
-
-                if(result < 0){
+              if(result < 0){
                     int resultNew = (result + 26);
 
                     char chNew = (char) (resultNew + base);
@@ -73,9 +69,9 @@ public class CaesarCipher{
                 pen.print(chNew);
                 }
             }
-            pen.println();
-        }
-    } //decrypt
+      pen.println();
+    }
+  } //decrypt
 
 } // class CaesarCipher
 
