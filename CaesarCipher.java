@@ -5,6 +5,12 @@ public class CaesarCipher{
 
         PrintWriter pen = new PrintWriter(System.out, true);
 
+        // error checking
+        if(args.length != 2){
+          System.err.println("You have entered an incorrect number of parameters. Please try again.");
+          System.exit(2);
+        }
+
         if(args[0].equals("encode")){
             encrypt(pen, args[1]);
         }
@@ -13,13 +19,15 @@ public class CaesarCipher{
             decrypt(pen, args[1]);
         }
 
+        // error checking
         else{
-            pen.println("Valid inputs are \"encode\" or \"decode\". Please try again.");
+            System.err.println("Valid inputs are \"encode\" or \"decode\". Please try again.");
+            System.exit(1);
         }
         
     } // main
 
-    static void encrypt(java.io.PrintWriter pen, String arg){
+    static void encrypt(PrintWriter pen, String arg){
 
         int base = (int) 'a';
         char[] str = arg.toCharArray();
@@ -40,7 +48,7 @@ public class CaesarCipher{
         }
     } //encrypt
 
-    static void decrypt(java.io.PrintWriter pen, String arg){
+    static void decrypt(PrintWriter pen, String arg){
         
         int base = (int) 'a';
         char[] str = arg.toCharArray();
