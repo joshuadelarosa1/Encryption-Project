@@ -22,8 +22,7 @@ public class CaesarCipher{
     else{
       System.err.println("Valid inputs are \"encode\" or \"decode\". Please try again.");
       System.exit(1);
-    }
-        
+    }   
   } // main
 
   static void encrypt(PrintWriter pen, String arg){
@@ -34,13 +33,13 @@ public class CaesarCipher{
     for(int n = 0; n < 26; n++){
       pen.printf("n = %d:", n);
         for(int i = 0; i < arg.length(); i++){
-              int ch = str[i];
-              int temp = ch - base;
+          int ch = str[i];
+          int temp = ch - base;
 
-              int result = (temp + n) % 26;
-              char chNew = (char) (result + base);
-              pen.print(chNew);
-            }
+          int result = (temp + n) % 26;
+          char chNew = (char) (result + base);
+          pen.print(chNew);
+        }
       pen.println();
     }
   } //encrypt
@@ -53,26 +52,26 @@ public class CaesarCipher{
     for(int n = 0; n < 26; n++){
       pen.printf("n = %d:", n);
         for(int i = 0; i < arg.length(); i++){
-              int ch = str[i];
-              int temp = ch - base;
-              int result = (temp - n) % 26;
+          int ch = str[i];
+          int temp = ch - base;
+          int result = (temp - n) % 26;
 
-              if(result < 0){
-                    int resultNew = (result + 26);
+          if(result < 0){
+            int resultNew = (result + 26);
 
-                    char chNew = (char) (resultNew + base);
-                    pen.print(chNew);
-                }
+            char chNew = (char) (resultNew + base);
+            pen.print(chNew);
+          }
 
-                else{
-                char chNew = (char) (result + base);
-                pen.print(chNew);
-                }
-            }
+          else{
+            char chNew = (char) (result + base);
+            pen.print(chNew);
+          }
+        }
       pen.println();
     }
   } //decrypt
-
+  
 } // class CaesarCipher
 
 
