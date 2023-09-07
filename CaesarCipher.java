@@ -1,6 +1,6 @@
 import java.io.PrintWriter;
 
-class CaesarCipher{
+public class CaesarCipher{
     public static void main(String[] args) throws Exception{
 
         PrintWriter pen = new PrintWriter(System.out, true);
