@@ -27,8 +27,6 @@ public class VigenereCipher{
 
   static void encrypt(PrintWriter pen, String arg, String codeWord){
     
-    int base = (int) 'a';
-    int i = 0, j = 0;
 
     if(codeWord.isEmpty()){
       pen.println(arg);
@@ -36,14 +34,13 @@ public class VigenereCipher{
       System.exit(0);
     }
 
+    int base = (int) 'a';
+    int i = 0, j = 0;
     char[] newCodeWord = codeWord.toCharArray();
     char[] temp = arg.toCharArray();
+    
 
     do {
-      if((Character.isAlphabetic(temp[i])) != true){
-        continue;
-      }
-
       if(j == newCodeWord.length){
         j = 0;
       }
@@ -67,7 +64,48 @@ public class VigenereCipher{
 
   static void decrypt(PrintWriter pen, String arg, String codeWord){
 
-  }
+    if(codeWord.isEmpty()){
+      pen.println(arg);
+
+      System.exit(0);
+    }
+
+    int base = (int) 'a';
+    int i = 0, j = 0;
+    char[] newCodeWord = codeWord.toCharArray();
+    char[] temp = arg.toCharArray();
+
+    do {
+      if(j == newCodeWord.length){
+        j = 0;
+      }
+
+      int current = temp[i];
+      int currentBase = current - base;
+      int currentCodeWord = newCodeWord[j];
+      int currentCodeWordBase = currentCodeWord - base;
+
+      int result = (currentBase - currentCodeWordBase) % 26;
+
+      if(result < 0){
+        int resultNew = (result + 26);
+
+        char chNew = (char) (resultNew + base);
+        pen.print(chNew);
+      }
+
+      else{
+      char chNew = (char) (result + base);
+      pen.print(chNew);
+      }
+
+      i++;
+      j++;
+    } while (i < arg.length());
+
+    pen.println();
+
+  } //decrypt
 } //class VignereCipher
 
 //https://www.w3schools.com/java/ref_string_isempty.asp#:~:text=The%20isEmpty()%20method%20checks,)%2C%20and%20false%20if%20not.
