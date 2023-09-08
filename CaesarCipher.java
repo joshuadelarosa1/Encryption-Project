@@ -5,28 +5,29 @@ public class CaesarCipher{
     
     PrintWriter pen = new PrintWriter(System.out, true);
     
-    // error checking
     if(args.length != 2){
       System.err.println("You have entered an incorrect number of parameters. Please try again.");
       System.exit(2);
-    }
+    }//error checks for correct # of parameters
 
     if(args[0].equals("encode")){
       encrypt(pen, args[1]);
-    }
+    }//if user inputs encode
     else if(args[0].equals("decode")){
       decrypt(pen, args[1]);
-    }
-  
-    // error checking 
+    }//if user inputs decode
     else{
       System.err.println("Valid inputs are \"encode\" or \"decode\". Please try again.");
       System.exit(1);
-    }   
+    } //error checking if user didn't put in valid inputs
   } // main
 
+  //preconditions: takes in a print writer & a string that needs to be encoded
+  //postconditions: prints a string with encoded phrase
+  //encrypt encodes and prints a phrase from the user by using the Caesar Cipher
   static void encrypt(PrintWriter pen, String arg){
-      
+    
+    //declarations for arithmatic
     int base = (int) 'a';
     char[] str = arg.toCharArray();
         
@@ -39,13 +40,17 @@ public class CaesarCipher{
           int result = (temp + n) % 26;
           char chNew = (char) (result + base);
           pen.print(chNew);
-        }
+        }//for to do arithmatic to get new values
       pen.println();
-    }
+    }//for that shows all values adding from 0-26
   } //encrypt
 
+  //preconditions: takes in a print writer & a string that needs to be encoded
+  //postconditions: prints a string with encoded phrase
+  //decrypt deocdes and prints a phrase from the user by using the Caesar Cipher
   static void decrypt(PrintWriter pen, String arg){
     
+    //declarations for arithmatic
     int base = (int) 'a';
     char[] str = arg.toCharArray();
         
@@ -61,26 +66,17 @@ public class CaesarCipher{
 
             char chNew = (char) (resultNew + base);
             pen.print(chNew);
-          }
+          }//if result is less than 0 and needs to loop back to z
 
           else{
             char chNew = (char) (result + base);
             pen.print(chNew);
-          }
-        }
+          }//normal cases where it does not become negative
+        }//for to do arithmatic for decoding
       pen.println();
-    }
+    }//for to show all decryption options
   } //decrypt
   
 } // class CaesarCipher
 
 
-
-
-//https://www.javatpoint.com/string-comparison-in-java
-//https://www.educative.io/answers/how-to-find-the-length-of-a-string-in-java
-//https://www.freecodecamp.org/news/string-to-char-array-java-tutorial/#:~:text=1.,on%20the%20current%20string%20object.
-//https://www.youtube.com/watch?v=jK6NX9iyi-8
-//https://www.tutorialspoint.com/java/util/scanner_close.htm#:~:text=The%20java.,()%20method%20closes%20this%20scanner.
-//https://www.digitalocean.com/community/tutorials/string-char-array-java
-//https://www.geeksforgeeks.org/java-program-to-get-a-character-from-a-string/#
