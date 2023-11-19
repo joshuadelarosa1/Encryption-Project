@@ -1,5 +1,3 @@
-package src;
-
 import java.io.PrintWriter;
 import java.lang.String;
 
@@ -39,11 +37,12 @@ public class VigenereCipher {
   static void encrypt(PrintWriter pen, String arg, String codeWord) {
     int alphaLength = 26;
 
-    if (codeWord.isEmpty()) {
+    if (codeWord.isEmpty() || arg.equals("")) {
       pen.println(arg);
 
       System.exit(0);
     } // if codeword is empty just gives back same word
+    
 
     // declaratinos for what the arithmatic needs
     int base = (int) 'a';
@@ -85,7 +84,7 @@ public class VigenereCipher {
   static void decrypt(PrintWriter pen, String arg, String codeWord) {
     int alphaLength = 26;
 
-    if (codeWord.isEmpty()) {
+    if (codeWord.isEmpty() || arg.equals("")) {
       pen.println(arg);
 
       System.exit(0);

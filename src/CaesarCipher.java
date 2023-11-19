@@ -1,5 +1,3 @@
-package src;
-
 import java.io.PrintWriter;
 
 /*
@@ -17,10 +15,10 @@ public class CaesarCipher {
     } // error checks for correct # of parameters
 
     if (args[0].equals("encode")) {
-      encrypt(pen, args[1]);
+      encrypt(pen, args[1], "encode");
     } // if user inputs encode
     else if (args[0].equals("decode")) {
-      decrypt(pen, args[1]);
+      encrypt(pen, args[1], "decode");
     } // if user inputs decode
     else {
       System.err.println("Valid inputs are \"encode\" or \"decode\". Please try again.");
@@ -31,7 +29,7 @@ public class CaesarCipher {
   // preconditions: takes in a print writer & a string that needs to be encoded
   // postconditions: prints a string with encoded phrase
   // encrypt encodes and prints a phrase from the user by using the Caesar Cipher
-  static void encrypt(PrintWriter pen, String arg) {
+  static void encrypt(PrintWriter pen, String arg, String userCall) {
     int alphaLength = 26;
 
     // declarations for arithmatic
@@ -44,46 +42,37 @@ public class CaesarCipher {
         int ch = str[i];
         int temp = ch - base;
 
-        int result = (temp + n) % alphaLength;
-        char chNew = (char) (result + base);
-        pen.print(chNew);
+        if (userCall.equals("encode")) {
+          int result = (temp + n) % alphaLength;
+          char chNew = (char) (result + base);
+          pen.print(chNew);
+        } else if (userCall.equals("decode")) {
+          int result = (temp - n) % alphaLength;
+
+          if (result < 0) {
+            char chNew = negativeResult(result);
+            pen.print(chNew);
+          } // if result is less than 0 and needs to loop back to z
+          else {
+            char chNew = (char) (result + base);
+            pen.print(chNew);
+          }
+        }
       } // for to do arithmatic to get new values
       pen.println();
     } // for that shows all values adding from 0-26
   } // encrypt
 
-  // preconditions: takes in a print writer & a string that needs to be encoded
-  // postconditions: prints a string with encoded phrase
-  // decrypt deocdes and prints a phrase from the user by using the Caesar Cipher
-  static void decrypt(PrintWriter pen, String arg) {
+  // preconditions: takes in the negative result
+  // postconditions: returns the wrapped around char
+  static char negativeResult(int result) {
     int alphaLength = 26;
-
-    // declarations for arithmatic
     int base = (int) 'a';
-    char[] str = arg.toCharArray();
 
-    for (int n = 0; n < alphaLength; n++) {
-      pen.printf("n = %d:", n);
-      for (int i = 0; i < arg.length(); i++) {
-        int ch = str[i];
-        int temp = ch - base;
-        int result = (temp - n) % alphaLength;
+    int resultNew = (result + alphaLength);
+    return (char) (resultNew + base);
 
-        if (result < 0) {
-          int resultNew = (result + alphaLength);
-
-          char chNew = (char) (resultNew + base);
-          pen.print(chNew);
-        } // if result is less than 0 and needs to loop back to z
-
-        else {
-          char chNew = (char) (result + base);
-          pen.print(chNew);
-        } // normal cases where it does not become negative
-      } // for to do arithmatic for decoding
-      pen.println();
-    } // for to show all decryption options
-  } // decrypt
+  } // negative result
 
 } // class CaesarCipher
 
